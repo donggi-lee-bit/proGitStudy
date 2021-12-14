@@ -74,3 +74,21 @@ git checkout -b version2 v2.0.0
 Switched to a new branch 'version2'
 ```
 <img width="607" alt="스크린샷 2021-12-14 오후 3 09 48" src="https://user-images.githubusercontent.com/73376468/145942806-6188ea03-3560-4b64-962d-acc214793896.png">
+
+## Git Alias
+- 자주 사용하는 명령어를 사용자 설정을 하여 명령을 간략하게 사용할 수 있다.
+
+### Alias 만드는 법
+```
+$ git config --global alias.co checkout
+$ git config --global alias.br branch
+$ git config --global alias.ci commit
+$ git config --global alias.st status
+```
+- config를 사용하여 명령의 alias를 만들 수 있다.
+- commit 명령어를 ci로 대신할 수 있게되었다.
+---
+git 명령어뿐만 아니라 외부 명령어도 실행할 수 있다. !를 앞에 추가하면 외부 명령을 실행한다.
+```
+$ git config --global alias.visual '!gitk'
+```
