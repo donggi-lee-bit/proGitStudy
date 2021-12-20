@@ -60,3 +60,11 @@
     - ```git rebase -i``` 대화형 모드로 rebase 한다. 어떤 시점부터 HEAD까지 rebase할 것인지 인자로 넘기면 된다.
         - 마지막 커밋 메시지 세 개를 수정한다고 하면, ```git rebase -i HEAD~3``` 혹은 ```git rebase -i HEAD~2^``` 해서 넘긴다.
     - 이 때도 이미 ```push``` 하였다면 commit을 수정하지 않는 게 좋다. 다른 개발자들에게 혼란을 줄 수 있음.
+
+### commit 합치기
+- ```git rebase -i``` 대화형 모드로 rebase할 때, ```squash``` 를 입력하면 git은 해당 커밋과 바로 이전 커밋을 합치고 커밋 메시지도 merge하게 된다.
+
+### commit 분리하기 (내용을 잘 이해하지 못함)
+-
+
+## Git Reset
