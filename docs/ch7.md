@@ -68,3 +68,39 @@
 -
 
 ## Git Reset
+git reset의 역할을 살펴보자
+
+### HEAD 브랜치 이동
+- ```HEAD```는 계속 현재 브랜치를 가리키고 있고, 현재 브랜치가 가리키는 커밋을 바꾼다.
+- reset 명령은 가장 최근의 ```git commit``` 명령을 되돌린다. ```git commit``` 명령을 실행하면 git은 새로운 커밋을 생성하고 HEAD가 가리키는 브랜치가 새로운 커밋을 가리키도록 업데이트한다. ```reset``` 명령 뒤에 ```HEAD~```를 주면 index나 워킹 디렉터리는 그대로이고 브랜치가 가리키는 커밋만 이전으로 되돌린다. index를 업데이트한 뒤 ```git commit```을 하면 ```git commit --amend``` 명령의 결과와 같아진다
+
+### Index 업데이트 (--mixed)
+
+- ```reset``` 명령을 실행할 때 아무 옵션도 주지 않으면 기본적으로 ```--mixed``` 옵션으로 동작한다.
+    - ```--mixed``` 옵션이 동작하면 가리키는 대상을 가장 최근의 commit으로 되돌리게된다. 그러고 나서 staging area를 비우기까지 한다. git commit 명령도 되돌리고 git add 명령까지 되돌리는 것이다.
+
+
+### 워킹 디렉터리 업데이트 (--hard)
+- ```--hard``` 옵션을 사용하면 워킹 디렉터리의 파일까지 강제로 덮어쓴다. ```--hard``` 옵션으로 덮은 내용은 되돌리는 것이 불가능하다.
+    - 만약 이전 버전을 git commit이 보관하고 있다면 reflog를 이용하여 복원할 수 있지만 commit하지 않았다면 데이터는 복원할 수 없다.
+
+## Git Checkout
+- ```reset --hard```와 달리 ```checkout``` 명령은 워킹 디렉터리를 안전하게 다룬다. 워킹 디렉터리에서 Merge 작업을 한 번 시도해보고 변경하지 않은 파일만 업데이트한다.
+
+- ```reset``` 명령은 ```HEAD```가 가리키는 브랜치를 움직이지만, ```checkout``` 명령은 ```HEAD``` 자체를 다른 브랜치로 옮긴다.
+    - 현재 브랜치가 develop 이라는 브랜치일 때, ```git checkout master``` 명령을 실행하면 develop 브랜치가 가리키는 커밋은 바뀌지 않고 ```HEAD```가 master 브랜치를 가리키도록 업데이트한다.
+- ***reset 명령은 HEAD가 가리키는 브랜치의 포인터를 옮겼고, checkout 명령은 HEAD 자체를 옮겼다.***
+
+## Git Merge
+- 오랫동안 합치지 않은 두 브랜치를 한 번에 Merge하면 거대한 충돌이 발생한다. 조그마한 충돌을 자주 겪고 풀어나감으로써 브랜치를 최신으로 유지하는 게 낫다.
+- Merge 하기 전에 워킹 디렉터리를 깔끔하게 정리하는 것이 좋다.
+- 작업하던 게 있다면 임시 branch에 커밋하거나 stash해둔다. 작업 중인 파일을 저장하지 않은 채로 Merge한다면 작업했던 내용을 잃을 수 있다.
+
+### Merge 취소하기
+- ```git merge --abort``` 명령으로 간단히 Merge 하기 전으로 되돌릴 수 있다.
+
+### 공백 무시하기
+- Merge가 공백 때문에 충돌이 날 때도 있다 그럴 땐 ```git merge --abort```로 merge를 취소하고, ```git merge -Xignore-space-change``` 혹은 ```git merge -Xignore-all-space``` 옵션을 주어 다시 merge한다. ```all space```는 모든 공백을 무시하고, ```space change```는 뭉쳐 있는 공백을 하나로 취급하게한다.
+
+### 수동으로 merge하기 (아직 내용 이해 못함)
+
